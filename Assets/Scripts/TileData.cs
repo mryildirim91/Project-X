@@ -14,6 +14,7 @@ public class TileData : ScriptableObject
 }
 public enum TileType
 {
+    Start,
     Dirt,
     Wood,
     Stone,

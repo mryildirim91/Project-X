@@ -1,12 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
+using DG.Tweening;
 using MyUtils;
 using UnityEngine;
 
 public class GridManager : MonoBehaviour
 {
     [SerializeField] private int _gridWidth, _gridHeight;
-    [SerializeField]private GameObject[] _tiles;
+    [SerializeField] private GameObject _emptyTile;
+    [SerializeField] private GameObject[] _tiles;
     void Start()
     {
         GenerateGrid();
@@ -22,6 +22,14 @@ public class GridManager : MonoBehaviour
                 GameObject obj = ObjectPool.Instance.GetObject(_tiles[randomGrid]);
                 obj.transform.position = GetPosition(x, z, (float)(_gridWidth - 1) / 2, (float)(_gridHeight - 1) / 2);
                 obj.transform.parent = transform;
+
+                if (z == 0)
+                {
+                    GameObject emptyTile = ObjectPool.Instance.GetObject(_emptyTile);
+                    emptyTile.transform.position =
+                        new Vector3(obj.transform.position.x, 0, obj.transform.position.z - 1);
+                    emptyTile.transform.parent = transform;
+                }
             }
         }  
     }
