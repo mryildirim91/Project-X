@@ -1,41 +1,41 @@
 using System.Collections.Generic;
 using DG.Tweening;
-using MyUtils;
 using UnityEngine;
 
 public class CardManager : MonoBehaviour
 {
+    readonly List<GameObject> _cardsList = new List<GameObject>();
     [SerializeField] private RectTransform[] _cardPlaceHolders;
     [SerializeField] private GameObject[] _cards;
 
     private void Start()
     {
-        List<GameObject> cardsList = new List<GameObject>();
-        
         foreach (var t in _cards)
         {
-            cardsList.Add(t);
+            _cardsList.Add(t);
         }
+        SpawnMinerCard(null);
+    }
 
-        int cardsListCount = cardsList.Count;
-        
-        for (int i = 0; i < cardsListCount; i++)
+    public void SpawnMinerCard(GameObject card)
+    {
+        if (!_cardsList.Contains(card) && card != null)
         {
-            int random = Random.Range(0, cardsList.Count);
-            GameObject obj = ObjectPool.Instance.GetObject(cardsList[random]);
-
-            foreach (var t in _cardPlaceHolders)
+            _cardsList.Add(card);
+        }
+        
+        foreach (var t in _cardPlaceHolders)
+        {
+            if (t.transform.childCount <= 0)
             {
-                if (t.transform.childCount <= 0)
-                {
-                    RectTransform rectTransform =  obj.GetComponent<RectTransform>();
-                    rectTransform.SetParent(t.transform, true);
-                    rectTransform.DOAnchorPos(t.anchoredPosition, 0);
-                    break;
-                }
+                int random = Random.Range(0, _cardsList.Count);
+                GameObject obj = Instantiate(_cardsList[random]);// NEEDS OBJECT POOLING!
+                obj.name = "Card";
+                RectTransform rectTransform =  obj.GetComponent<RectTransform>();
+                rectTransform.SetParent(t.transform, true);
+                rectTransform.DOAnchorPos(Vector2.zero, 0);
+                _cardsList.Remove(_cardsList[random]);
             }
-
-            cardsList.Remove(cardsList[random]);
         }
     }
 }

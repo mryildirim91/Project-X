@@ -1,5 +1,4 @@
 using DG.Tweening;
-using MyUtils;
 using UnityEngine;
 
 public class GridManager : MonoBehaviour
@@ -19,16 +18,14 @@ public class GridManager : MonoBehaviour
             for (int z = 0; z < _gridHeight; z++)
             {
                 int randomGrid = Random.Range(0, _tiles.Length);
-                GameObject obj = ObjectPool.Instance.GetObject(_tiles[randomGrid]);
+                GameObject obj = Instantiate(_tiles[randomGrid], transform, true);
                 obj.transform.position = GetPosition(x, z, (float)(_gridWidth - 1) / 2, (float)(_gridHeight - 1) / 2);
-                obj.transform.parent = transform;
 
                 if (z == 0)
                 {
-                    GameObject emptyTile = ObjectPool.Instance.GetObject(_emptyTile);
+                    GameObject emptyTile = Instantiate(_emptyTile, transform, true);
                     emptyTile.transform.position =
                         new Vector3(obj.transform.position.x, 0, obj.transform.position.z - 1);
-                    emptyTile.transform.parent = transform;
                 }
             }
         }  

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 84a97fd4036bcdc41b5ade03ce0fee5b, type: 3}
-  m_Name: Miner Card 3
+  m_Name: Miner Card 4
   m_EditorClassIdentifier: 
-  _cardSprite: {fileID: 0}
-  _miner: {fileID: 0}
+  _cardSprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  _miner: {fileID: 2336830573107543369, guid: f986baf4f4159c448bb53cc572b00367, type: 3}

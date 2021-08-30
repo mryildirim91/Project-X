@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84a97fd4036bcdc41b5ade03ce0fee5b, type: 3}
   m_Name: Miner Card 2
   m_EditorClassIdentifier: 
-  _cardSprite: {fileID: 0}
-  _miner: {fileID: 0}
+  _cardSprite: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+  _miner: {fileID: 1301848171921633964, guid: b10bd5a7de1aa424aa164308e465cc56, type: 3}

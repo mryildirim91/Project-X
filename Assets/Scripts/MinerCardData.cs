@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using MyUtils;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Miner Card" , fileName = "Miner Card")]
@@ -11,8 +10,8 @@ public class MinerCardData : ScriptableObject
 
     public Sprite CardSprite => _cardSprite;
 
-    public void SpawnMiner()
+    public GameObject SpawnMiner()
     {
-        GameObject obj = ObjectPool.Instance.GetObject(_miner);
+        return Instantiate(_miner);// NEEDS OBJECT POOLING!
     }
 }

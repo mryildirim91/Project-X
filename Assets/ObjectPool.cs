@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace MyUtils
-{
     public class ObjectPool : MonoBehaviour
     {
         public static ObjectPool Instance { get; private set; }
@@ -46,8 +44,6 @@ namespace MyUtils
 
         private GameObject CreateNewObject(GameObject clone)
         {
-            GameObject obj = Instantiate(clone);
-            return obj;
+            return Instantiate(clone);
         }
     }
-}
