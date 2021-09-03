@@ -108,4 +108,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cab51cd0acc3294589fd9b8811484fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tileData: {fileID: 11400000, guid: 27d1f5fcc498a944dbb8019ce007e32f, type: 2}
+  obstacleData: {fileID: 11400000, guid: 27d1f5fcc498a944dbb8019ce007e32f, type: 2}

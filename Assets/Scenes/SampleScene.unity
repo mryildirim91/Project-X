@@ -123,49 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &210150146
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 210150148}
-  - component: {fileID: 210150147}
-  m_Layer: 0
-  m_Name: Object Pool
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &210150147
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 210150146}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d5cd2fa0c4893544b8286d1ef6aab7a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &210150148
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 210150146}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &353273077
 GameObject:
   m_ObjectHideFlags: 0
@@ -296,7 +253,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &569631482
 GameObject:
@@ -392,7 +349,7 @@ RectTransform:
   m_Children:
   - {fileID: 353273078}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -416,11 +373,16 @@ MonoBehaviour:
   - {fileID: 911287366}
   - {fileID: 1113336970}
   - {fileID: 621327000}
-  _cards:
+  _laborerCards:
   - {fileID: 2992016850389534206, guid: 5bafa1c823d04694c8f36a690f649e0b, type: 3}
   - {fileID: 2992016850389534206, guid: 23b6846850300644dbc43da055b86d5e, type: 3}
   - {fileID: 2992016850389534206, guid: 498572510cab47e47b10b227fd8fc659, type: 3}
   - {fileID: 2992016850389534206, guid: 24db5ff2592846240be0237bccfd66e1, type: 3}
+  _troopCards:
+  - {fileID: 2992016850389534206, guid: e38626012abcac14d94c138d51402354, type: 3}
+  - {fileID: 2992016850389534206, guid: f19397605e97e504f8dbdb408db47b1f, type: 3}
+  - {fileID: 2992016850389534206, guid: 59c939930bf8ba7459e21217189f00d2, type: 3}
+  - {fileID: 2992016850389534206, guid: 689e2dda3cc9cad4780c3e5756959311, type: 3}
 --- !u!1 &621326999
 GameObject:
   m_ObjectHideFlags: 0
@@ -904,7 +866,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!222 &6515459768199220712
 CanvasRenderer:
