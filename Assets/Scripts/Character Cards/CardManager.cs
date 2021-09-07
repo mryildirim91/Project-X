@@ -27,34 +27,16 @@ public class CardManager : MonoBehaviour
     {
         if (characterCard != null)
         {
-
-            
             if (!_laborerCardsList.Contains(characterCard) && characterCard.GetComponent<LaborerCard>())
             {
                 _laborerCardsList.Add(characterCard);
-                Debug.Log("laborer");
             }
             else if(!_troopCardsList.Contains(characterCard) && characterCard.GetComponent<TroopCard>())
             {
                 _troopCardsList.Add(characterCard);
-                Debug.Log("troop");
             }
         }
         
-        /*foreach (var t in _cardPlaceHolders)
-        {
-            if (t.transform.childCount <= 0)
-            {
-                int random = Random.Range(0, _laborerCardsList.Count);
-                GameObject obj = Instantiate(_laborerCardsList[random]);// NEEDS OBJECT POOLING!
-                obj.name = "Card";
-                RectTransform rectTransform =  obj.GetComponent<RectTransform>();
-                rectTransform.SetParent(t.transform, true);
-                rectTransform.DOAnchorPos(Vector2.zero, 0);
-                _laborerCardsList.Remove(_laborerCardsList[random]);
-            }
-        }*/
-
         for (int i = 0; i < _cardPlaceHolders.Length; i++)
         {
             if (_cardPlaceHolders[i].childCount <= 0)
@@ -65,21 +47,18 @@ public class CardManager : MonoBehaviour
                 if (i < 2)
                 {
                     random = Random.Range(0, _laborerCardsList.Count);
-                    obj = Instantiate(_laborerCardsList[random]);// NEEDS OBJECT POOLING!
+                    obj = ObjectPool.Instance.GetObject(_laborerCardsList[random]);
                     _laborerCardsList.Remove(_laborerCardsList[random]);
                 }
                 else
                 {
                     random = Random.Range(0, _troopCardsList.Count);
-                    obj = Instantiate(_troopCardsList[random]);// NEEDS OBJECT POOLING!
+                    obj = ObjectPool.Instance.GetObject(_troopCardsList[random]);
                     _troopCardsList.Remove(_troopCardsList[random]);
                 }
-
-                obj.SetActive(true);
-                obj.name = "Card";
+                
                 RectTransform rectTransform = obj.GetComponent<RectTransform>();
                 rectTransform.SetParent(_cardPlaceHolders[i].transform,false);
-                rectTransform.DOAnchorPos(Vector2.zero, 0);
             }
         }
     }

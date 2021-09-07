@@ -24,8 +24,9 @@ public class GridManager : MonoBehaviour
                 if (z == 0)
                 {
                     GameObject emptyTile = Instantiate(_emptyTile, transform, true);
+                    var position = obj.transform.position;
                     emptyTile.transform.position =
-                        new Vector3(obj.transform.position.x, 0, obj.transform.position.z - 1);
+                        new Vector3(position.x, 0, position.z - 1);
                 }
             }
         }  

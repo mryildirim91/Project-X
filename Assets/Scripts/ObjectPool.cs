@@ -15,16 +15,18 @@ using UnityEngine;
         {
             if (_poolDict.TryGetValue(clone.name, out Queue<GameObject> objectList))
             {
-                if (objectList.Count == 0)
-                {
-                    return CreateNewObject(clone);
-                }
+                if (objectList.Count == 0) return CreateNewObject(clone);
                 
-                GameObject obj = objectList.Dequeue();
-                obj.SetActive(true);
-                return obj;
+                else
+                {
+                    GameObject obj = objectList.Dequeue();
+                    obj.SetActive(true);
+                    return obj;
+                }
+
             }
-            return CreateNewObject(clone);
+            else
+                return CreateNewObject(clone);
         }
 
         public void ReturnGameObject(GameObject clone)
@@ -44,6 +46,8 @@ using UnityEngine;
 
         private GameObject CreateNewObject(GameObject clone)
         {
-            return Instantiate(clone);
+            GameObject obj = Instantiate(clone);
+            obj.name = clone.name;
+            return obj;
         }
     }

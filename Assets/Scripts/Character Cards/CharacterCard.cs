@@ -1,3 +1,4 @@
+using System;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,7 +13,7 @@ public abstract class CharacterCard : MonoBehaviour, IBeginDragHandler, IDragHan
     private GameObject _minerClone;
     private CardManager _cardManager;
     [SerializeField] private LayerMask _tileLayer;
-    [SerializeField] protected CharacterCardData characterCardData;
+    [SerializeField] protected CharacterCardData _characterCardData;
 
     private void Awake()
     {
@@ -23,11 +24,23 @@ public abstract class CharacterCard : MonoBehaviour, IBeginDragHandler, IDragHan
 
     private void OnEnable()
     {
-        _imageComponent.enabled = true;
-        _imageComponent.sprite = characterCardData.CardSprite;
-        _rectTransform.DOAnchorPos(Vector2.zero, 0);
+        if(!_imageComponent.enabled)
+            _imageComponent.enabled = true;
+        
+        _rectTransform.anchoredPosition = Vector2.zero;
         _rectTransform.offsetMax = Vector2.zero;
         _rectTransform.offsetMin = Vector2.zero;
+    }
+
+    private void OnDisable()
+    {
+        _cardPicked = false;
+        _tileDetected = false;
+    }
+
+    private void Start()
+    {
+        _imageComponent.sprite = _characterCardData.CardSprite;
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -60,7 +73,7 @@ public abstract class CharacterCard : MonoBehaviour, IBeginDragHandler, IDragHan
             _minerClone = null;
             _rectTransform.SetParent(null);
             _cardManager.SpawnCharacterCard(gameObject); //Send this card to cardslist and spawn another card.
-            gameObject.SetActive(false);// NEEDS OBJECT POOLING!
+            ObjectPool.Instance.ReturnGameObject(gameObject);// NEEDS OBJECT POOLING!
         }
     }
 
@@ -68,7 +81,7 @@ public abstract class CharacterCard : MonoBehaviour, IBeginDragHandler, IDragHan
     {
         SpawnMiner();
     }
-
+    
     private void SpawnMiner()
     {
         if(!_cardPicked)
@@ -88,7 +101,7 @@ public abstract class CharacterCard : MonoBehaviour, IBeginDragHandler, IDragHan
                     
                     if (_minerClone == null)
                     {
-                        _minerClone = characterCardData.SpawnMiner();//Spawn corresponding miner here.
+                        _minerClone = ObjectPool.Instance.GetObject(_characterCardData.Prefab);//Spawn corresponding miner here.
                         _minerClone.transform.position = hit.transform.position + Vector3.up * hit.transform.localScale.y * 1.5f;
                     }
                     else

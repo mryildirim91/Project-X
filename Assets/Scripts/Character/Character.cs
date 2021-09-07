@@ -26,9 +26,14 @@ public abstract class Character : MonoBehaviour, IDamagable, IActivated
         Walk();
     }
 
+    private void OnDisable()
+    {
+        _activated = false;
+    }
+
     private void OnBecameInvisible()
     {
-        gameObject.SetActive(false);
+        ObjectPool.Instance.ReturnGameObject(gameObject);
     }
 
     protected abstract void Detect();

@@ -12,7 +12,7 @@ public class Troop : Character
             
             _detectedObject = true;
 
-            if (hit.collider.CompareTag("Castle"))
+            /*if (hit.collider.CompareTag("Castle"))
             {
                 //Attack State
                 Attack();
@@ -20,7 +20,7 @@ public class Troop : Character
             else
             {
                 //Die
-            }
+            }*/
         }
         else
         {
