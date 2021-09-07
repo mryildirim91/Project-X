@@ -91,4 +91,4 @@ MonoBehaviour:
   _tileLayer:
     serializedVersion: 2
     m_Bits: 64
-  characterCardData: {fileID: 11400000, guid: eebb8e8e0471fa24f87aa048b2167ba6, type: 2}
+  _characterCardData: {fileID: 11400000, guid: eebb8e8e0471fa24f87aa048b2167ba6, type: 2}
