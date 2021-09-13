@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
+[CreateAssetMenu(menuName = "Character Card/Troop Card" , fileName = "Troop Card")]
 public class TroopCardData : CharacterCardData
 {
 

@@ -10,10 +10,10 @@ public abstract class CharacterCard : MonoBehaviour, IBeginDragHandler, IDragHan
     private Vector2 _lastMousePosition;
     private Image _imageComponent;
     private RectTransform _rectTransform;
-    private GameObject _minerClone;
+    private GameObject _prefab;
     private CardManager _cardManager;
     [SerializeField] private LayerMask _tileLayer;
-    [SerializeField] protected CharacterCardData _characterCardData;
+    [SerializeField] private CharacterCardData _characterCardData;
 
     private void Awake()
     {
@@ -69,11 +69,11 @@ public abstract class CharacterCard : MonoBehaviour, IBeginDragHandler, IDragHan
         }
         else
         {
-            _minerClone.GetComponent<IActivated>().Activate();//Let miner go.
-            _minerClone = null;
+            _prefab.GetComponent<IActivated>().Activate();//Let miner go.
+            _prefab = null;
             _rectTransform.SetParent(null);
             _cardManager.SpawnCharacterCard(gameObject); //Send this card to cardslist and spawn another card.
-            ObjectPool.Instance.ReturnGameObject(gameObject);// NEEDS OBJECT POOLING!
+            ObjectPool.Instance.ReturnGameObject(gameObject);
         }
     }
 
@@ -99,21 +99,21 @@ public abstract class CharacterCard : MonoBehaviour, IBeginDragHandler, IDragHan
                     _tileDetected = true;
                     _imageComponent.enabled = false;
                     
-                    if (_minerClone == null)
+                    if (_prefab == null)
                     {
-                        _minerClone = ObjectPool.Instance.GetObject(_characterCardData.Prefab);//Spawn corresponding miner here.
-                        _minerClone.transform.position = hit.transform.position + Vector3.up * hit.transform.localScale.y * 1.5f;
+                        _prefab = ObjectPool.Instance.GetObject(_characterCardData.Prefab);//Spawn corresponding prefab here.
+                        _prefab.transform.position = hit.transform.position + Vector3.up * hit.transform.localScale.y * 1.5f;
                     }
                     else
                     {
-                        _minerClone.SetActive(true);
+                        _prefab.SetActive(true);
                     }
                 }
                 else
                 {
-                    if (_minerClone.transform.position != hit.transform.position + Vector3.up * _minerClone.transform.localScale.y * 1.5f)
+                    if (_prefab.transform.position != hit.transform.position + Vector3.up * _prefab.transform.localScale.y * 1.5f)
                     {
-                        _minerClone.transform.position = hit.transform.position + Vector3.up * _minerClone.transform.localScale.y * 1.5f;// Move miner position over the starting tile.
+                        _prefab.transform.position = hit.transform.position + Vector3.up * _prefab.transform.localScale.y * 1.5f;// Move miner position over the starting tile.
                     } 
                 }
             }
@@ -124,9 +124,9 @@ public abstract class CharacterCard : MonoBehaviour, IBeginDragHandler, IDragHan
                     _tileDetected = false;
                     _imageComponent.enabled = true;
                     
-                    if (_minerClone != null)
+                    if (_prefab != null)
                     {
-                        _minerClone.SetActive(false);
+                        _prefab.SetActive(false);
                     }
                 }
             }

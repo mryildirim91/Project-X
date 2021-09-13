@@ -3,8 +3,7 @@ using UnityEngine;
 
 public class Laborer : Character
 {
-    [SerializeField]private LaborerData _laborerData;
-    
+    [SerializeField] private ObstacleType _effectiveAgainst;
     protected override void Detect()
     {
         if (Physics.Raycast(transform.position, transform.forward, out var hit, 5f))
@@ -13,20 +12,26 @@ public class Laborer : Character
             
             _detectedObject = true;
 
-            /*var mine = hit.collider.GetComponent<Obstacle>();
+            Obstacle obstacle = hit.collider.GetComponent<Obstacle>();
+            Troop troop = hit.collider.GetComponent<Troop>();
 
-            if (_laborerData.EffectiveAgainst != mine.ObstacleType)
-                _damage = _laborerData.IneffectiveDamage;*/
-
-            //Attack State
-            Attack();
+            if (obstacle == null && troop == null) return;
+            if(troop.TroopState == TroopState.Attack) return;
+            
+            if (_effectiveAgainst != obstacle.ObstacleType || troop != null)
+            {
+                _damageComponent.PassiveDamage();
+            }
+            _movementComponent.StopWalking();
+            _attackcomponent.PerformAttack(_animator);
         }
         else
         {
             if (!_detectedObject) return;
             
             _detectedObject = false;
-            
+            _movementComponent.KeepWalking();
+            _damageComponent.ActiveDamage();
         }
     }
 }

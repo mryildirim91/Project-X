@@ -1,66 +1,64 @@
 using System;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
-public abstract class Character : MonoBehaviour, IDamagable, IActivated
+[RequireComponent(typeof(Health),typeof(Movement),typeof(Damage))]
+public abstract class Character : MonoBehaviour, IActivated
 {
-    protected bool _activated, _detectedObject;
-    protected float _health, _damage, _speed;
-    private CharacterType _characterType;
-    [SerializeField]private CharacterData _characterData;
+    private bool _active;
+    protected bool _detectedObject;
+    protected Health _healthComponent;
+    protected Movement _movementComponent;
+    protected Damage _damageComponent;
+    protected Attack _attackcomponent;
+    protected Animator _animator;
+    [SerializeField] private Color _color; //temporary
+    [SerializeField]private CharacterType _characterType;
 
-    private void Start()
+    protected abstract void Detect();
+    
+    private void Awake()
     {
-        _health = _characterData.Health;
-        _speed = _characterData.Speed;
-        _damage = _characterData.Damage;
-        _characterType = _characterData.CharacterType;
+        _animator = GetComponent<Animator>();
+        _healthComponent = GetComponent<Health>();
+        _movementComponent = GetComponent<Movement>();
+        _damageComponent = GetComponent<Damage>();
+        _attackcomponent = GetComponent<Attack>();
+        GetComponent<MeshRenderer>().material.color = _color;
+    }
 
-        GetComponent<MeshRenderer>().material.color = _characterData.Color;
+    protected virtual void OnEnable()
+    {
+        _active = false;
+        _healthComponent.enabled = false;
+        _movementComponent.enabled = false;
+        _damageComponent.enabled = false;
+        _attackcomponent.enabled = false;
     }
 
     private void Update()
     {
-        if(!_activated) return;
+        if(!_active) return;
         
         Detect();
-        Walk();
-    }
-
-    private void OnDisable()
-    {
-        _activated = false;
     }
 
     private void OnBecameInvisible()
     {
         ObjectPool.Instance.ReturnGameObject(gameObject);
     }
-
-    protected abstract void Detect();
-
-    protected virtual void Attack()
-    {
-        //Attack State
-    }
-
-    protected virtual void Walk()
-    {
-        //Walk State
-        transform.Translate(Vector3.forward * _speed * Time.deltaTime);
-    }
-    
-    public void TakeDamage(float damageAmount)
-    {
-        _health = -damageAmount;
-
-        if (_health <= 0)
-        {
-            //Die
-        }
-    }
-
     public void Activate()
     {
-        _activated = true;
+        _active = true;
+        _healthComponent.enabled = true;
+        _movementComponent.enabled = true;
+        _damageComponent.enabled = true;
+        _attackcomponent.enabled = true;
     }
+}
+
+public enum CharacterType
+{
+    Laborer,
+    Troop
 }

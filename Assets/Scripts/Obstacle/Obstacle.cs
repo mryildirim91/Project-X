@@ -1,29 +1,35 @@
 using System;
 using UnityEngine;
 
-public class Obstacle : MonoBehaviour, IDamagable
+public class Obstacle : MonoBehaviour
 {
-    private float _health, _reactiveDamage;
-    private ObstacleType _obstacleType;
+    [SerializeField] private Color _color; //temporary
+    [SerializeField]private ObstacleType _obstacleType;
     public ObstacleType ObstacleType => _obstacleType;
-    [SerializeField]private ObstacleData obstacleData;
+    
+    private Health _healthComponent;
+    private Damage _damageComponent;
 
-    private void Start()
+    private void Awake()
     {
-        _obstacleType = obstacleData.Type;
-        _health = obstacleData.Health;
-        _reactiveDamage = obstacleData.ReactiveDamage;
-        GetComponent<MeshRenderer>().material.color = obstacleData.Color;
+        _healthComponent = GetComponent<Health>();
+        _damageComponent = GetComponent<Damage>();
+        GetComponent<MeshRenderer>().material.color = _color;
     }
 
-    public void TakeDamage(float damageAmount)
+    private void OnEnable()
     {
-        _health -= damageAmount;
-
-        if (_health <= 0)
-        {
-            //
-        }
+        _damageComponent.PassiveDamage();
     }
+}
+
+public enum ObstacleType
+{
+    Wood,
+    Stone,
+    Copper,
+    Iron,
+    Silver,
+    Diamond
 }
 
