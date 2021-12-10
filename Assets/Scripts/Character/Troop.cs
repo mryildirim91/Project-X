@@ -10,18 +10,21 @@ public class Troop : Character
     
     protected override void Detect()
     {
-        if (Physics.Raycast(transform.position, transform.forward, out var hit, 5f))
+        if (Physics.Raycast(transform.position, transform.forward, out var hit, _detectionDistance,_detectionLayer))
         {
             if (_detectedObject) return;
             _detectedObject = true;
             
-            Obstacle obstacle = hit.collider.GetComponent<Obstacle>();
-            Laborer laborer = hit.collider.GetComponent<Laborer>();
+            var gotObstacle = hit.collider.gameObject.TryGetComponent(out Obstacle obstacle);
+            var gotLaborer = hit.collider.gameObject.TryGetComponent(out Laborer laborer);
+            var gotTroop = hit.collider.gameObject.TryGetComponent(out Troop troop);
             
-            if(hit.collider.GetComponent<Troop>().TroopState == _troopState) return;
-            if(_troopState == TroopState.Attack && laborer != null) return;
+            if(gotTroop)
+                if(_troopState == troop.TroopState) return; // don't attack other troop if same state
             
-            if (obstacle != null)
+            if(_troopState == TroopState.Attack && gotLaborer) return; // don't attack laborer if troop is in attack state
+            
+            if (gotObstacle)
             {
                 _damageComponent.PassiveDamage();
             }

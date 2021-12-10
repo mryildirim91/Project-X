@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -4632896796462841255}
   - component: {fileID: 121633196191714247}
   - component: {fileID: -6073842395190790024}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Dirt Tile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -125,7 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84d0c1feaa15c994d8bcce9f03f6a512, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damage: 0
+  _activeDamage: 0
   _passiveDamage: 0
 --- !u!114 &121633196191714247
 MonoBehaviour:

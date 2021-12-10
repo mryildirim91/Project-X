@@ -14,7 +14,7 @@ public class Obstacle : MonoBehaviour
     {
         _healthComponent = GetComponent<Health>();
         _damageComponent = GetComponent<Damage>();
-        GetComponent<MeshRenderer>().material.color = _color;
+        GetComponent<MeshRenderer>().material.color = _color;//temporary
     }
 
     private void OnEnable()

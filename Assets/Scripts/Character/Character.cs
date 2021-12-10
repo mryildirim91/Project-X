@@ -7,13 +7,16 @@ public abstract class Character : MonoBehaviour, IActivated
 {
     private bool _active;
     protected bool _detectedObject;
-    protected Health _healthComponent;
+    private Health _healthComponent;
     protected Movement _movementComponent;
     protected Damage _damageComponent;
     protected Attack _attackcomponent;
     protected Animator _animator;
+    [SerializeField] protected float _detectionDistance;
+    [SerializeField] protected LayerMask _detectionLayer;
     [SerializeField] private Color _color; //temporary
-    [SerializeField]private CharacterType _characterType;
+    [SerializeField] private CharacterType _characterType;
+
 
     protected abstract void Detect();
     

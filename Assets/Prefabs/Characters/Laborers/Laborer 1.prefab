@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 7918007426786441387}
   - component: {fileID: -1293090196517414532}
   - component: {fileID: 9024524348074598912}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Laborer 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -140,6 +140,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63c044e9498918d47bd07a52e6b73d5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _detectionDistance: 1
+  _detectionLayer:
+    serializedVersion: 2
+    m_Bits: 776
   _color: {r: 0.8679245, g: 0.2652901, b: 0.2652901, a: 0}
   _characterType: 0
   _effectiveAgainst: 0
@@ -155,7 +159,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84d0c1feaa15c994d8bcce9f03f6a512, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damage: 0
+  _activeDamage: 0
   _passiveDamage: 0
 --- !u!114 &-1293090196517414532
 MonoBehaviour:

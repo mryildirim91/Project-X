@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: -7455488889193857006}
   - component: {fileID: -2025764749262135258}
   - component: {fileID: -8081790619223715059}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Troop 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -139,6 +139,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1a7dbc8e9558264ea68860e6db241cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _detectionDistance: 1
+  _detectionLayer:
+    serializedVersion: 2
+    m_Bits: 904
   _color: {r: 0.92169, g: 0, b: 1, a: 0}
   _characterType: 1
 --- !u!114 &-7455488889193857006
@@ -153,7 +157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84d0c1feaa15c994d8bcce9f03f6a512, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damage: 0
+  _activeDamage: 0
   _passiveDamage: 0
 --- !u!114 &-2025764749262135258
 MonoBehaviour:
